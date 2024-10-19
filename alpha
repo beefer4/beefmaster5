@@ -1,0 +1,216 @@
+local replacementCharacterAnims = {
+	["idle"] = "17464923657",
+	["walk"] = "15962326593",
+}
+
+local replacementAnimations = { 
+	["rbxassetid://13491635433"] = {"rbxassetid://13532562418", 1.1, 0, Enum.AnimationPriority.Action3},  -- Combo 1
+	["rbxassetid://13296577783"] = {"rbxassetid://13532600125", 1.1, 0, Enum.AnimationPriority.Action3},  -- Combo 2
+	["rbxassetid://13295919399"] = {"rbxassetid://17889458563", 1.02, 0, Enum.AnimationPriority.Action3},  -- Combo 3
+	["rbxassetid://13295936866"] = {"rbxassetid://17889290569", 0.935, 0, Enum.AnimationPriority.Action3},  -- Combo 4
+	--["rbxassetid://0"] = {"rbxassetid://0", 1.24, 0, Enum.AnimationPriority.Action3},    -- un decided uppercut
+	--["rbxassetid://0"] = {"rbxassetid://0", 1.24, 0, Enum.AnimationPriority.Action3},    -- un decided downslam
+	--["rbxassetid://0"] = {"rbxassetid://0", 1.24, 0, Enum.AnimationPriority.Action3},    -- un decided wallcombo
+}
+
+local replacementSoundIds = {
+
+}
+
+local SoundIds = {
+
+}
+
+local tweenservice = game:GetService("TweenService")
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local playerGui = player.PlayerGui
+local hotbar = playerGui:FindFirstChild("Hotbar")
+local backpack = hotbar:FindFirstChild("Backpack")
+local hotbarFrame = backpack:FindFirstChild("Hotbar")
+local baseButton1 = hotbarFrame:FindFirstChild("1").Base
+local baseButton2 = hotbarFrame:FindFirstChild("2").Base
+local baseButton3 = hotbarFrame:FindFirstChild("3").Base
+local baseButton4 = hotbarFrame:FindFirstChild("4").Base
+
+local ToolName1 = baseButton1.ToolName
+local ToolName2 = baseButton2.ToolName
+local ToolName3 = baseButton3.ToolName
+local ToolName4 = baseButton4.ToolName
+
+ToolName1.Text = "Rizz Barrage"
+ToolName2.Text = "Jelq Blast"
+ToolName3.Text = "Edge Bullet"
+ToolName4.Text = "Mango Missile"
+
+local localScript = backpack:WaitForChild("LocalScript")
+local cooldownGui = localScript:WaitForChild("Cooldown")
+
+local screenGui = playerGui:WaitForChild("ScreenGui")
+local magicHealth = screenGui:WaitForChild("MagicHealth")
+local tx = magicHealth:WaitForChild("TextLabel")
+local health = magicHealth:WaitForChild("Health")
+local barbar = health:WaitForChild("Bar")
+local bar = barbar:WaitForChild("Bar")
+
+local ultName = "BALKAN SIGMA PACKGOD MODE"
+local ultColor = Color3.fromRGB(39, 89, 255)
+local cdcolor = Color3.fromRGB(39, 89, 255)
+
+local cdColorTween = tweenservice:Create(cooldownGui, TweenInfo.new(1.35, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {BackgroundColor3 = cdcolor})
+cdColorTween:Play()
+
+local ultTween = tweenservice:Create(bar, TweenInfo.new(1.35, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {ImageColor3 = ultColor})
+ultTween:Play()
+
+local ultTextTween1 = tweenservice:Create(tx, TweenInfo.new(0.35, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 1})
+ultTextTween1:Play()
+
+local ultTextShadowTween = tweenservice:Create(tx, TweenInfo.new(0.35, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 1})
+ultTextShadowTween:Play()
+
+local ultTextTween2 = tweenservice:Create(tx, TweenInfo.new(0.6, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 0})
+local ultTextShadowTween2 = tweenservice:Create(tx, TweenInfo.new(0.6, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 0})
+
+ultTextTween1.Completed:Connect(function()
+	ultTextTween2:Play()
+	ultTextShadowTween2:Play()
+
+	tx.Text = ""
+
+	local text = ""
+
+	for i, v in string.split(ultName, "") do
+		wait(0.04)
+		text = text..v
+
+		tx.Text = text   
+	end
+end)
+
+local function findGuiAndSetText()
+	local screenGui = playerGui:FindFirstChild("ScreenGui")
+
+	if screenGui then
+		local magicHealthFrame = screenGui:FindFirstChild("MagicHealth")
+
+		if magicHealthFrame then
+			local textLabel = magicHealthFrame:FindFirstChild("TextLabel")
+
+			if textLabel then
+				textLabel.Text = ultName
+			end
+
+			local health = magicHealth:FindFirstChild("Health")
+			local barbar = health:WaitForChild("Bar")
+			local bar = barbar:WaitForChild("Bar")
+
+		end
+	end 
+end
+
+playerGui.DescendantAdded:Connect(findGuiAndSetText)
+
+findGuiAndSetText()
+
+local function onAnimationPlayed(animationTrack)
+	print(animationTrack.Animation.AnimationId)
+	if replacementAnimations[tostring(animationTrack.Animation.AnimationId)] then
+
+		for _, animTrack in pairs(humanoid:GetPlayingAnimationTracks()) do
+			if animTrack.Animation.AnimationId ~= "rbxassetid://7815618175" 
+				and animTrack.Animation.AnimationId ~= "rbxassetid://7807831448" 
+				and animTrack.Animation.AnimationId ~= "rbxassetid://"..replacementCharacterAnims["idle"]
+				and animTrack.Animation.AnimationId ~= "rbxassetid://"..replacementCharacterAnims["walk"]
+			then
+
+				animTrack:Stop()
+			end
+		end
+
+		local AnimAnim = Instance.new("Animation")
+		AnimAnim.AnimationId = replacementAnimations[animationTrack.Animation.AnimationId][1]
+
+		local Anim = humanoid:LoadAnimation(AnimAnim)
+		Anim.Priority = replacementAnimations[animationTrack.Animation.AnimationId][4]
+
+		Anim:Play()
+
+		Anim:AdjustSpeed(0.01)
+		Anim.TimePosition = replacementAnimations[animationTrack.Animation.AnimationId][3]
+		Anim:AdjustSpeed(replacementAnimations[animationTrack.Animation.AnimationId][2])
+	elseif animationTrack.Animation.AnimationId == "rbxassetid://12618271998" then
+		for _, animTrack in pairs(humanoid:GetPlayingAnimationTracks()) do
+			animTrack:Stop(0)
+		end
+
+		local AnimAnim = Instance.new("Animation")
+		AnimAnim.AnimationId = "rbxassetid://17861840167"
+
+		local Anim:AnimationClip = humanoid:LoadAnimation(AnimAnim)
+		Anim.Priority = Enum.AnimationPriority.Action3
+
+		Anim:Play(0)
+
+		local speed = 1
+
+		Anim:AdjustSpeed(0.001)
+
+		Anim.TimePosition = 0
+
+		for i = 1, 66 do	
+
+			speed-=0.0151505			
+			Anim:AdjustSpeed(speed)	
+			wait(0.032)
+			if Anim.Name == "BlitzEnd" then break end
+		end
+
+	elseif animationTrack.Animation.AnimationId == "rbxassetid://12618292188" then
+		animationTrack:Stop(0)
+
+		for _, animaTrack in pairs(humanoid:GetPlayingAnimationTracks()) do
+			if animaTrack.Animation.AnimationId == "rbxassetid://17861840167" then
+				animaTrack.Name="BlitzEnd"
+				animaTrack:AdjustSpeed(0.001)
+				animaTrack.TimePosition = 1.28
+				animaTrack:AdjustSpeed(1)
+
+				break
+			end
+		end	
+	end
+end
+
+coroutine.wrap(function() --spawn anim
+	wait(2)
+	local AnimAnim = Instance.new("Animation")
+	AnimAnim.AnimationId = "rbxassetid://18897551628"
+
+	local Anim:AnimationClip = humanoid:LoadAnimation(AnimAnim)
+	Anim.Priority = Enum.AnimationPriority.Action4
+
+	Anim:Play(0)
+
+	Anim:AdjustSpeed(0.001)
+
+	Anim.TimePosition = 0
+
+	Anim:AdjustSpeed(1)
+end)
+
+local animScript = character:WaitForChild("Animate")
+
+for i, v in animScript:GetChildren() do
+	if replacementCharacterAnims[v.Name] then
+		v:FindFirstChildWhichIsA("Animation").AnimationId = "rbxassetid://"..replacementCharacterAnims[v.Name]
+	end
+end
+
+
+humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+
+
