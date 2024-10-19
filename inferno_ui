@@ -1,0 +1,173 @@
+local replacementAnimations = {
+	["rbxassetid://13491635433"] = {"rbxassetid://13532562418", 1.1, 0, Enum.AnimationPriority.Action3},  -- Combo 1
+	["rbxassetid://13296577783"] = {"rbxassetid://13532600125", 1.1, 0, Enum.AnimationPriority.Action3},  -- Combo 2
+	["rbxassetid://13295919399"] = {"rbxassetid://17889458563", 1.02, 0, Enum.AnimationPriority.Action3},  -- Combo 3
+	["rbxassetid://13295936866"] = {"rbxassetid://17889290569", 0.935, 0, Enum.AnimationPriority.Action3},  -- Combo 4
+}
+
+local replacementSoundIds = {
+
+}
+
+local SoundIds = {
+	["UltimateTheme"] = 1842908121,
+	["Howl"] = 9120790529,
+}
+
+local tweenservice = game:GetService("TweenService")
+local insertservice = game:GetService("InsertService")
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+if player:FindFirstChild("scriptloaded") then return end
+local doublescriptprevention = Instance.new("BoolValue", player)
+doublescriptprevention.Name = "scriptloaded"
+
+local ui = player.PlayerGui
+local hotbar = ui.Hotbar
+local ultimateUi = ui:WaitForChild("ScreenGui")
+local ultimateBar = ultimateUi:WaitForChild("MagicHealth").Health.Bar.Bar
+
+local ultName = "BALKAN SIGMA PACKGOD MODE"
+local ultColor = Color3.fromRGB(39, 89, 255)
+
+local alphaButtonUi = Instance.new("ScreenGui")
+alphaButtonUi.ResetOnSpawn = false
+alphaButtonUi.Name = "AlphaGui"
+alphaButtonUi.Parent = ui
+
+local alphaButton = Instance.new("ImageButton")
+alphaButton.BackgroundTransparency = 1
+alphaButton.ImageTransparency = 1
+alphaButton.Image = "rbxassetid://15475044456"
+alphaButton.ImageColor3 = Color3.new(0, 0, 0)
+alphaButton.AnchorPoint = Vector2.new(0.5, 0.5)
+alphaButton.Size = UDim2.new(0.085, 0, 0.122, 0)
+alphaButton.Position = UDim2.new(0.902, 0, 0.855, 0)
+alphaButton.Parent = alphaButtonUi
+
+local aspectratioconstraint = Instance.new("UIAspectRatioConstraint")
+aspectratioconstraint.Parent = alphaButton
+
+character.ChildAdded:Connect(function(child)
+	if child:IsA("Accessory") then
+		print(child.Name)
+	end
+end)
+
+task.spawn(function()
+	local tweenservice = game:GetService("TweenService"):Create(alphaButton, TweenInfo.new(1, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {ImageTransparency = 0, ImageColor3 = Color3.new(1, 1, 1)}):Play()
+end)
+
+local function alphaMode()
+	if character:FindFirstChild("alphaMale") then return end
+	local doublescriptprevention = Instance.new("BoolValue", character)
+	doublescriptprevention.Name = "alphaMale"
+
+	task.spawn(function()
+		local startvoiceline = Instance.new("Sound")
+		startvoiceline.SoundId = "rbxassetid://"..SoundIds["Howl"]
+		startvoiceline.Parent = character:WaitForChild("Head")
+
+		wait(0.2)
+
+		startvoiceline:Play()
+
+		game.Debris:AddItem(startvoiceline, startvoiceline.TimeLength+3)
+	end)
+
+	--ult bar
+	local ultTween = tweenservice:Create(ultimateBar, TweenInfo.new(1.35, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {ImageColor3 = ultColor})
+	ultTween:Play()
+
+	local ultTextTween1 = tweenservice:Create(ultimateUi.MagicHealth.TextLabel, TweenInfo.new(0.35, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 1})
+	ultTextTween1:Play()
+
+	local ultTextShadowTween = tweenservice:Create(ultimateUi.MagicHealth.TextLabel.TextLabel, TweenInfo.new(0.35, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 1})
+	ultTextShadowTween:Play()
+
+	local ultTextTween2 = tweenservice:Create(ultimateUi.MagicHealth.TextLabel, TweenInfo.new(0.6, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 0})
+	local ultTextShadowTween2 = tweenservice:Create(ultimateUi.MagicHealth.TextLabel.TextLabel, TweenInfo.new(0.6, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 0})
+
+	ultTextTween1.Completed:Connect(function()
+		ultTextTween2:Play()
+		ultTextShadowTween2:Play()
+
+		ultimateUi.MagicHealth.TextLabel.Text = ""
+
+		local text = ""
+
+		for i, v in string.split(ultName, "") do
+			wait(0.04)
+			text = text..v
+
+			ultimateUi.MagicHealth.TextLabel.Text = text   
+		end
+	end)
+end
+
+local function onAnimationPlayed(animationTrack)
+	print(animationTrack.Animation.AnimationId)
+	if replacementAnimations[tostring(animationTrack.Animation.AnimationId)] then
+
+		for _, animTrack in pairs(humanoid:GetPlayingAnimationTracks()) do
+			animTrack:Stop()
+		end
+
+		local AnimAnim = Instance.new("Animation")
+		AnimAnim.AnimationId = replacementAnimations[animationTrack.Animation.AnimationId][1]
+
+		local Anim = humanoid:LoadAnimation(AnimAnim)
+		Anim.Priority = replacementAnimations[animationTrack.Animation.AnimationId][4]
+
+		Anim:Play()
+
+		Anim:AdjustSpeed(0.01)
+		Anim.TimePosition = replacementAnimations[animationTrack.Animation.AnimationId][3]
+		Anim:AdjustSpeed(replacementAnimations[animationTrack.Animation.AnimationId][2])
+
+	elseif animationTrack.Animation.AnimationId == "rbxassetid://12618271998" then
+		for _, animTrack in pairs(humanoid:GetPlayingAnimationTracks()) do
+			animTrack:Stop(0)
+		end
+
+		local AnimAnim = Instance.new("Animation")
+		AnimAnim.AnimationId = "rbxassetid://17861840167"
+
+		local Anim:AnimationClip = humanoid:LoadAnimation(AnimAnim)
+		Anim.Priority = Enum.AnimationPriority.Action3
+
+		Anim:Play(0)
+
+		local speed = 1
+
+		Anim:AdjustSpeed(0.001)
+
+		Anim.TimePosition = 0
+
+		for i = 1, 66 do	
+			
+			speed-=0.0151505			
+			Anim:AdjustSpeed(speed)	
+			wait(0.032)
+			if Anim.Name == "BlitzEnd" then break end
+		end
+		
+		elseif animationTrack.Animation.AnimationId == "rbxassetid://12618292188" then
+			animationTrack:Stop(0)
+
+			for _, animaTrack in pairs(humanoid:GetPlayingAnimationTracks()) do
+				if animaTrack.Animation.AnimationId == "rbxassetid://17861840167" then
+					animaTrack.Name="BlitzEnd"
+					animaTrack:AdjustSpeed(0.001)
+					animaTrack.TimePosition = 1.28
+					animaTrack:AdjustSpeed(1)
+
+					break
+				end
+			end	
+		end
+	end
+	humanoid.AnimationPlayed:Connect(onAnimationPlayed)
