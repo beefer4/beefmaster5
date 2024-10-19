@@ -1,173 +1,423 @@
-local replacementAnimations = {
-	["rbxassetid://13491635433"] = {"rbxassetid://13532562418", 1.1, 0, Enum.AnimationPriority.Action3},  -- Combo 1
-	["rbxassetid://13296577783"] = {"rbxassetid://13532600125", 1.1, 0, Enum.AnimationPriority.Action3},  -- Combo 2
-	["rbxassetid://13295919399"] = {"rbxassetid://17889458563", 1.02, 0, Enum.AnimationPriority.Action3},  -- Combo 3
-	["rbxassetid://13295936866"] = {"rbxassetid://17889290569", 0.935, 0, Enum.AnimationPriority.Action3},  -- Combo 4
-}
+print(script.Parent.Parent.Parent)
 
-local replacementSoundIds = {
+local plr = game.Players.LocalPlayer
+local chr = plr.Character or plr.CharacterAdded:Wait()
+local plrui = plr.PlayerGui
 
-}
+local ui = Instance.new("ScreenGui")
+ui.Name = "InfernoExp"
+ui.Parent = plrui
 
-local SoundIds = {
-	["UltimateTheme"] = 1842908121,
-	["Howl"] = 9120790529,
-}
+function brolyButton(parent)
+	local broly = Instance.new("CanvasGroup")
+	broly.Parent = parent
+	broly.Size = UDim2.new(0.939, 0, 0.216, 0)
+	broly.BackgroundColor3 = Color3.new(0, 0, 0)
+	broly.BackgroundTransparency = 0.7
+	broly.ZIndex = 4
 
-local tweenservice = game:GetService("TweenService")
-local insertservice = game:GetService("InsertService")
+	local clickRegion = Instance.new("TextButton")
+	clickRegion.Parent = broly
+	clickRegion.Name = "Click"
+	clickRegion.Size = UDim2.new(1, 0, 1, 0)
+	clickRegion.BackgroundTransparency = 1
+	clickRegion.Text = ""
+	clickRegion.ZIndex = 99
 
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
+	local brolyRatio = Instance.new("UIAspectRatioConstraint")
+	brolyRatio.Parent = broly
+	brolyRatio.AspectRatio = 3
 
-if player:FindFirstChild("scriptloaded") then return end
-local doublescriptprevention = Instance.new("BoolValue", player)
-doublescriptprevention.Name = "scriptloaded"
+	local brolyCorner = Instance.new("UICorner")
+	brolyCorner.Parent = broly
+	brolyCorner.CornerRadius = UDim.new(0.23, 0)
 
-local ui = player.PlayerGui
-local hotbar = ui.Hotbar
-local ultimateUi = ui:WaitForChild("ScreenGui")
-local ultimateBar = ultimateUi:WaitForChild("MagicHealth").Health.Bar.Bar
+	local brolyImage = Instance.new("ImageLabel")
+	brolyImage.Parent = broly
+	brolyImage.Image = "rbxassetid://"..113505910031025
+	brolyImage.Position = UDim2.new(-0.033, 0,-0.206, 0)
+	brolyImage.Size = UDim2.new(0.733, 0, 1.798, 0)
+	brolyImage.BackgroundTransparency = 1
+	brolyImage.ZIndex = 4
 
-local ultName = "BALKAN SIGMA PACKGOD MODE"
-local ultColor = Color3.fromRGB(39, 89, 255)
+	local brolyImageShadow = Instance.new("ImageLabel")
+	brolyImageShadow.Parent = broly
+	brolyImageShadow.Image = "rbxassetid://"..113505910031025
+	brolyImageShadow.ImageColor3 = Color3.new(0, 0, 0)
+	brolyImageShadow.Position = UDim2.new(-0.067, 0, -0.257, 0)
+	brolyImageShadow.Size = UDim2.new(0.733, 0, 1.798, 0)
+	brolyImageShadow.BackgroundTransparency = 1
+	brolyImageShadow.ZIndex = 3
 
-local alphaButtonUi = Instance.new("ScreenGui")
-alphaButtonUi.ResetOnSpawn = false
-alphaButtonUi.Name = "AlphaGui"
-alphaButtonUi.Parent = ui
+	local brolyText = Instance.new("ImageLabel")
+	brolyText.Parent = broly
+	brolyText.Image = "rbxassetid://"..86630796984799
+	brolyText.Position = UDim2.new(0.566, 0, 0.052, 0)
+	brolyText.Size = UDim2.new(0.414, 0, 0.336, 0)
+	brolyText.BackgroundTransparency = 1
+	brolyText.ZIndex = 6
 
-local alphaButton = Instance.new("ImageButton")
-alphaButton.BackgroundTransparency = 1
-alphaButton.ImageTransparency = 1
-alphaButton.Image = "rbxassetid://15475044456"
-alphaButton.ImageColor3 = Color3.new(0, 0, 0)
-alphaButton.AnchorPoint = Vector2.new(0.5, 0.5)
-alphaButton.Size = UDim2.new(0.085, 0, 0.122, 0)
-alphaButton.Position = UDim2.new(0.902, 0, 0.855, 0)
-alphaButton.Parent = alphaButtonUi
+	local brolyTextShadow = Instance.new("ImageLabel")
+	brolyTextShadow.Parent = broly
+	brolyTextShadow.Image = "rbxassetid://"..86630796984799
+	brolyTextShadow.ImageColor3 = Color3.new(0, 0, 0)
+	brolyTextShadow.Position = UDim2.new(0.555, 0, 0.116, 0)
+	brolyTextShadow.Size = UDim2.new(0.414, 0, 0.336, 0)
+	brolyTextShadow.BackgroundTransparency = 1
+	brolyTextShadow.ZIndex = 3
 
-local aspectratioconstraint = Instance.new("UIAspectRatioConstraint")
-aspectratioconstraint.Parent = alphaButton
+	local brolyBg = Instance.new("ImageLabel")
+	brolyBg.Parent = broly
+	brolyBg.Image = "rbxassetid://"..121652201027598
+	brolyBg.Position = UDim2.new(0, 0, -0.45, 0)
+	brolyBg.Size = UDim2.new(1, 0, 1.45, 0)
+	brolyBg.BackgroundTransparency = 1
+	brolyBg.ZIndex = 2
+	
+	local brolyBgGradient = Instance.new("UIGradient")
+	brolyBgGradient.Parent = brolyBg
+	brolyBgGradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.fromHex("6c6c6c")),
+		ColorSequenceKeypoint.new(0.225, Color3.fromHex("808080")),
+		ColorSequenceKeypoint.new(1, Color3.fromHex("ffffff")),
+	})
 
-character.ChildAdded:Connect(function(child)
-	if child:IsA("Accessory") then
-		print(child.Name)
-	end
-end)
-
-task.spawn(function()
-	local tweenservice = game:GetService("TweenService"):Create(alphaButton, TweenInfo.new(1, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {ImageTransparency = 0, ImageColor3 = Color3.new(1, 1, 1)}):Play()
-end)
-
-local function alphaMode()
-	if character:FindFirstChild("alphaMale") then return end
-	local doublescriptprevention = Instance.new("BoolValue", character)
-	doublescriptprevention.Name = "alphaMale"
-
-	task.spawn(function()
-		local startvoiceline = Instance.new("Sound")
-		startvoiceline.SoundId = "rbxassetid://"..SoundIds["Howl"]
-		startvoiceline.Parent = character:WaitForChild("Head")
-
-		wait(0.2)
-
-		startvoiceline:Play()
-
-		game.Debris:AddItem(startvoiceline, startvoiceline.TimeLength+3)
-	end)
-
-	--ult bar
-	local ultTween = tweenservice:Create(ultimateBar, TweenInfo.new(1.35, Enum.EasingStyle.Circular, Enum.EasingDirection.Out), {ImageColor3 = ultColor})
-	ultTween:Play()
-
-	local ultTextTween1 = tweenservice:Create(ultimateUi.MagicHealth.TextLabel, TweenInfo.new(0.35, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 1})
-	ultTextTween1:Play()
-
-	local ultTextShadowTween = tweenservice:Create(ultimateUi.MagicHealth.TextLabel.TextLabel, TweenInfo.new(0.35, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 1})
-	ultTextShadowTween:Play()
-
-	local ultTextTween2 = tweenservice:Create(ultimateUi.MagicHealth.TextLabel, TweenInfo.new(0.6, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 0})
-	local ultTextShadowTween2 = tweenservice:Create(ultimateUi.MagicHealth.TextLabel.TextLabel, TweenInfo.new(0.6, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {TextTransparency = 0})
-
-	ultTextTween1.Completed:Connect(function()
-		ultTextTween2:Play()
-		ultTextShadowTween2:Play()
-
-		ultimateUi.MagicHealth.TextLabel.Text = ""
-
-		local text = ""
-
-		for i, v in string.split(ultName, "") do
-			wait(0.04)
-			text = text..v
-
-			ultimateUi.MagicHealth.TextLabel.Text = text   
-		end
-	end)
+	return broly
 end
 
-local function onAnimationPlayed(animationTrack)
-	print(animationTrack.Animation.AnimationId)
-	if replacementAnimations[tostring(animationTrack.Animation.AnimationId)] then
+function dioButton(parent)
+	local dio = Instance.new("CanvasGroup")
+	dio.Parent = parent
+	dio.Size = UDim2.new(0.939, 0, 0.216, 0)
+	dio.BackgroundColor3 = Color3.new(0, 0, 0)
+	dio.BackgroundTransparency = 0.7
+	dio.ZIndex = 4
 
-		for _, animTrack in pairs(humanoid:GetPlayingAnimationTracks()) do
-			animTrack:Stop()
-		end
+	local clickRegion = Instance.new("TextButton")
+	clickRegion.Parent = dio
+	clickRegion.Name = "Click"
+	clickRegion.Size = UDim2.new(1, 0, 1, 0)
+	clickRegion.BackgroundTransparency = 1
+	clickRegion.Text = ""
+	clickRegion.ZIndex = 99
 
-		local AnimAnim = Instance.new("Animation")
-		AnimAnim.AnimationId = replacementAnimations[animationTrack.Animation.AnimationId][1]
+	local dioRatio = Instance.new("UIAspectRatioConstraint")
+	dioRatio.Parent = dio
+	dioRatio.AspectRatio = 3
 
-		local Anim = humanoid:LoadAnimation(AnimAnim)
-		Anim.Priority = replacementAnimations[animationTrack.Animation.AnimationId][4]
+	local dioCorner = Instance.new("UICorner")
+	dioCorner.Parent = dio
+	dioCorner.CornerRadius = UDim.new(0.23, 0)
 
-		Anim:Play()
+	local dioImage = Instance.new("ImageLabel")
+	dioImage.Parent = dio
+	dioImage.Image = "rbxassetid://"..10958570572
+	dioImage.Position = UDim2.new(-0.154, 0, -0.45, 0)
+	dioImage.Size = UDim2.new(0.979, 0, 3.266, 0)
+	dioImage.BackgroundTransparency = 1
+	dioImage.ZIndex = 4
 
-		Anim:AdjustSpeed(0.01)
-		Anim.TimePosition = replacementAnimations[animationTrack.Animation.AnimationId][3]
-		Anim:AdjustSpeed(replacementAnimations[animationTrack.Animation.AnimationId][2])
+	local dioImageShadow = Instance.new("ImageLabel")
+	dioImageShadow.Parent = dio
+	dioImageShadow.Image = "rbxassetid://"..10958570572
+	dioImageShadow.ImageColor3 = Color3.new(0, 0, 0)
+	dioImageShadow.Position = UDim2.new(0.616, 0, 0.138, 0)
+	dioImageShadow.Size = UDim2.new(0.297, 0, 0.404, 0)
+	dioImageShadow.BackgroundTransparency = 1
+	dioImageShadow.ZIndex = 3
 
-	elseif animationTrack.Animation.AnimationId == "rbxassetid://12618271998" then
-		for _, animTrack in pairs(humanoid:GetPlayingAnimationTracks()) do
-			animTrack:Stop(0)
-		end
+	local dioText = Instance.new("ImageLabel")
+	dioText.Parent = dio
+	dioText.Image = "rbxassetid://"..85352789596434
+	dioText.Position = UDim2.new(0.631, 0, 0.096, 0)
+	dioText.Size = UDim2.new(0.297, 0, 0.404, 0)
+	dioText.BackgroundTransparency = 1
+	dioText.ZIndex = 6
 
-		local AnimAnim = Instance.new("Animation")
-		AnimAnim.AnimationId = "rbxassetid://17861840167"
+	local dioTextGradient = Instance.new("UIGradient")
+	dioTextGradient.Parent = dioText
+	dioTextGradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.fromHex("773c9c")),
+		ColorSequenceKeypoint.new(0.228, Color3.fromHex("b433ff")),
+		ColorSequenceKeypoint.new(0.429, Color3.fromHex("be62da")),
+		ColorSequenceKeypoint.new(0.678, Color3.fromHex("db4cff")),
+		ColorSequenceKeypoint.new(1, Color3.fromHex("dca4ff")),
+	})
 
-		local Anim:AnimationClip = humanoid:LoadAnimation(AnimAnim)
-		Anim.Priority = Enum.AnimationPriority.Action3
+	local dioTextShadow = Instance.new("ImageLabel")
+	dioTextShadow.Parent = dio
+	dioTextShadow.Image = "rbxassetid://"..85352789596434
+	dioTextShadow.ImageColor3 = Color3.new(0, 0, 0)
+	dioTextShadow.Position = UDim2.new(0.555, 0, 0.116, 0)
+	dioTextShadow.Size = UDim2.new(0.414, 0, 0.336, 0)
+	dioTextShadow.BackgroundTransparency = 1
+	dioTextShadow.ZIndex = 3
 
-		Anim:Play(0)
+	local dioBg = Instance.new("ImageLabel")
+	dioBg.Parent = dio
+	dioBg.Image = "rbxassetid://"..94288651707591
+	dioBg.Position = UDim2.new(0, 0, -0.147, 0)
+	dioBg.Size = UDim2.new(1.057, 0, 1.294, 0)
+	dioBg.BackgroundTransparency = 1
+	dioBg.ZIndex = 2
 
-		local speed = 1
+	local dioBgGradient = Instance.new("UIGradient")
+	dioBgGradient.Parent = dioBg
+	dioBgGradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.fromHex("6c6c6c")),
+		ColorSequenceKeypoint.new(0.225, Color3.fromHex("808080")),
+		ColorSequenceKeypoint.new(1, Color3.fromHex("ffffff")),
+	})
 
-		Anim:AdjustSpeed(0.001)
+	return dio
+end
 
-		Anim.TimePosition = 0
+function alphaButton(parent)
+	local alpha = Instance.new("CanvasGroup")
+	alpha.Parent = parent
+	alpha.Size = UDim2.new(0.939, 0, 0.216, 0)
+	alpha.BackgroundColor3 = Color3.new(0, 0, 0)
+	alpha.BackgroundTransparency = 0.7
+	alpha.ZIndex = 4
 
-		for i = 1, 66 do	
-			
-			speed-=0.0151505			
-			Anim:AdjustSpeed(speed)	
-			wait(0.032)
-			if Anim.Name == "BlitzEnd" then break end
-		end
-		
-		elseif animationTrack.Animation.AnimationId == "rbxassetid://12618292188" then
-			animationTrack:Stop(0)
+	local clickRegion = Instance.new("TextButton")
+	clickRegion.Parent = alpha
+	clickRegion.Name = "Click"
+	clickRegion.Size = UDim2.new(1, 0, 1, 0)
+	clickRegion.BackgroundTransparency = 1
+	clickRegion.Text = ""
+	clickRegion.ZIndex = 99
 
-			for _, animaTrack in pairs(humanoid:GetPlayingAnimationTracks()) do
-				if animaTrack.Animation.AnimationId == "rbxassetid://17861840167" then
-					animaTrack.Name="BlitzEnd"
-					animaTrack:AdjustSpeed(0.001)
-					animaTrack.TimePosition = 1.28
-					animaTrack:AdjustSpeed(1)
+	local dioRatio = Instance.new("UIAspectRatioConstraint")
+	dioRatio.Parent = alpha
+	dioRatio.AspectRatio = 3
 
-					break
-				end
-			end	
-		end
-	end
-	humanoid.AnimationPlayed:Connect(onAnimationPlayed)
+	local alphaCorner = Instance.new("UICorner")
+	alphaCorner.Parent = alpha
+	alphaCorner.CornerRadius = UDim.new(0.23, 0)
+
+	local alphaImage = Instance.new("ImageLabel")
+	alphaImage.Parent = alpha
+	alphaImage.Image = "rbxassetid://"..17862391938
+	alphaImage.Position = UDim2.new(-0.001, 0, -0.337, 0)
+	alphaImage.Size = UDim2.new(0.452, 0, 1.668, 0)
+	alphaImage.ZIndex = 4
+
+	local alphaText = Instance.new("ImageLabel")
+	alphaText.Parent = alpha
+	alphaText.Image = "rbxassetid://"..77084935385836
+	alphaText.Position = UDim2.new(0.475, 0, 0.06, 0)
+	alphaText.Size = UDim2.new(0.522, 0, 0.88, 0)
+	alphaText.BackgroundTransparency = 1
+	alphaText.ZIndex = 6
+
+	local alphaTextGradient = Instance.new("UIGradient")
+	alphaTextGradient.Parent = alphaText
+	alphaTextGradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.fromHex("004cff")),
+		ColorSequenceKeypoint.new(0.145, Color3.fromHex("0886ff")),
+		ColorSequenceKeypoint.new(0.232, Color3.fromHex("0196ff")),
+		ColorSequenceKeypoint.new(0.381, Color3.fromHex("00aeff")),
+		ColorSequenceKeypoint.new(0.533, Color3.fromHex("0099ff")),
+		ColorSequenceKeypoint.new(0.621, Color3.fromHex("0391ff")),
+		ColorSequenceKeypoint.new(0.716, Color3.fromHex("005fc5")),
+		ColorSequenceKeypoint.new(0.832, Color3.fromHex("002d95")),
+		ColorSequenceKeypoint.new(1, Color3.fromHex("000000")),
+
+	})
+
+	local alphaBg = Instance.new("ImageLabel")
+	alphaBg.Parent = alpha
+	alphaBg.Image = "rbxassetid://"..94288651707591
+	alphaBg.Size = UDim2.new(1, 0, 1, 0)
+	alphaBg.BackgroundTransparency = 1
+	alphaBg.ImageColor3 = Color3.new(0, 0, 0)
+	alphaBg.ZIndex = 2
+
+	return alpha
+end
+
+function sign(char, parent)
+	local sign = Instance.new("CanvasGroup")
+	sign.Parent = parent
+	sign.Position = UDim2.new(0, 0, 0, 0)
+	sign.Size = UDim2.new(0.939, 0, 0.062, 0)
+	sign.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	sign.BackgroundTransparency = 0.6
+	sign.ZIndex = 3
+
+	local signTextLabel = Instance.new("TextLabel")
+	signTextLabel.Parent = sign
+	signTextLabel.Size = UDim2.new(1, 0, 1, 0)
+	signTextLabel.Position = UDim2.new(0, 0, 0, 0)
+	signTextLabel.TextScaled = true
+	signTextLabel.Text = char
+	signTextLabel.TextColor3 = Color3.new(1, 1, 1)
+	signTextLabel.BackgroundTransparency = 1
+	signTextLabel.Font = Enum.Font.Merriweather
+	signTextLabel.ZIndex = 4
+
+	local signUiCorner = Instance.new("UICorner")
+	signUiCorner.CornerRadius = UDim.new(0.23, 0)
+	signUiCorner.Parent = sign	
+
+	local signRatio = Instance.new("UIAspectRatioConstraint")
+	signRatio.AspectRatio = 6.5
+	signRatio.Parent = sign
+
+	return sign
+end
+
+--------------------------------------------------------------------------------
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+--------------------------------------------------------------------------------
+
+local holder = Instance.new("CanvasGroup")
+holder.Parent = ui
+holder.AnchorPoint = Vector2.new(1, 1)
+holder.Position = UDim2.new(0.99, 0, 0.99, 0)
+holder.Size = UDim2.new(0.211, 0, 0.396, 0)
+holder.BackgroundTransparency = 1
+
+local holderratio = Instance.new("UIAspectRatioConstraint")
+holderratio.Parent = holder
+holderratio.AspectRatio = 0.706
+
+local holdercorner = Instance.new("UICorner")
+holdercorner.Parent = holder
+holdercorner.CornerRadius = UDim.new(0.04, 0)
+
+--------------------------------------------------------------------------------
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+--------------------------------------------------------------------------------
+
+local scrolling = Instance.new("ScrollingFrame")
+scrolling.Parent = holder
+scrolling.Position = UDim2.new(0, 0, 1, 0)
+scrolling.Size = UDim2.new(1, 0, 0, 0)
+scrolling.BackgroundTransparency = 1
+scrolling.ZIndex = 2
+scrolling.ScrollBarImageColor3 = Color3.new(0, 0, 0)
+
+local scrollingcorner = Instance.new("UICorner")
+scrollingcorner.Parent = scrolling
+scrollingcorner.CornerRadius = UDim.new(0.04, 0)
+
+local scrollinglist = Instance.new("UIListLayout")
+scrollinglist.Parent = scrolling
+scrollinglist.Padding = UDim.new(0.009, 0)
+
+local scrollingpadding = Instance.new("UIPadding")
+scrollingpadding.Parent = scrolling
+
+scrollingpadding.PaddingBottom = UDim.new(0, 0)
+scrollingpadding.PaddingLeft = UDim.new(0.022, 0)
+scrollingpadding.PaddingRight = UDim.new(0, 0)
+scrollingpadding.PaddingTop = UDim.new(0.008, 0)
+-------------------------------------------------------------------------------
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+--------------------------------------------------------------------------------
+
+local bg = Instance.new("Frame")
+bg.Parent = holder
+bg.Position = UDim2.new(0, 0, 1, 0)
+bg.Size = UDim2.new(1, 0, 0, 0)
+bg.BackgroundColor3 = Color3.fromRGB(23, 23, 23)
+bg.ZIndex = 1
+
+local bggradient = Instance.new("UIGradient")
+bggradient.Parent = bg
+bggradient.Rotation = 20
+bggradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromHex("ffffff")), ColorSequenceKeypoint.new(1, Color3.fromHex("adadad"))})
+
+local bgcorner = Instance.new("UICorner")
+bgcorner.Parent = bg
+bgcorner.CornerRadius = UDim.new(0.04, 0)
+
+--------------------------------------------------------------------------------
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+--------------------------------------------------------------------------------
+
+local UiSound = Instance.new("Sound")
+UiSound.SoundId = "rbxassetid://18298978146"
+UiSound.Parent = ui
+UiSound:Play()
+
+game.Debris:AddItem(UiSound, UiSound.TimeLength+1)
+
+--------------------------------------------------------------------------------
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+--------------------------------------------------------------------------------
+
+local saitamaSign = sign("Saitama", scrolling)
+
+local broly = brolyButton(scrolling)
+broly:WaitForChild("Click").MouseButton1Click:Connect(function()
+	if chr:FindFirstChild("DontGiveThisNiggaCharacters") then return end
+	local antiDouble = Instance.new("BoolValue", chr)
+	antiDouble.Name = "DontGiveThisNiggaCharacters"
+	
+	loadstring(game:HttpGet"https://raw.githubusercontent.com/beefer4/beefmaster5/refs/heads/main/broly")()
+end)
+
+local garouSign = sign("Garou", scrolling)
+
+local dio = dioButton(scrolling)
+dio:WaitForChild("Click").MouseButton1Click:Connect(function()
+	if chr:FindFirstChild("DontGiveThisNiggaCharacters") then return end
+	local antiDouble = Instance.new("BoolValue", chr)
+	antiDouble.Name = "DontGiveThisNiggaCharacters"
+
+	loadstring(game:HttpGet"https://raw.githubusercontent.com/beefer4/beefmaster5/refs/heads/main/dio")()
+end)
+
+local genosSign = sign("Genos", scrolling)
+
+local alpha = alphaButton(scrolling)
+alpha:WaitForChild("Click").MouseButton1Click:Connect(function()
+	if chr:FindFirstChild("DontGiveThisNiggaCharacters") then return end
+	local antiDouble = Instance.new("BoolValue", chr)
+	antiDouble.Name = "DontGiveThisNiggaCharacters"
+
+	loadstring(game:HttpGet"https://raw.githubusercontent.com/beefer4/beefmaster5/refs/heads/main/alpha")()
+end)
+
+local sonicSign = sign("Sonic", scrolling)
+
+local metalBatSign = sign("Metal Bat", scrolling)
+
+local atomicSamuraiSign = sign("Atomic Samuai", scrolling)
+
+local tatsumakiSign = sign("Tatsumaki", scrolling)
+
+--------------------------------------------------------------------------------
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+--------------------------------------------------------------------------------
+
+function open()
+	game.TweenService:Create(scrolling, TweenInfo.new(0.7, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 1, 0), Position = UDim2.new(0, 0, 0, 0)}):Play()
+	game.TweenService:Create(bg, TweenInfo.new(0.7, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 1, 0), Position = UDim2.new(0, 0, 0, 0)}):Play()
+	holder.Visible = true
+end
+
+function close()
+	game.TweenService:Create(scrolling, TweenInfo.new(0.7, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, 1, 0), Position = UDim2.new(1, 0, 0, 0)}):Play()
+	game.TweenService:Create(bg, TweenInfo.new(0.7, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = UDim2.new(1, 0, 0, 0), Position = UDim2.new(0, 0, 1, 0)}):Play()
+	holder.Visible = false
+end
+
+--------------------------------------------------------------------------------
+-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--
+--------------------------------------------------------------------------------
+
+wait(1)
+
+open()
