@@ -1,6 +1,6 @@
 local replacementCharacterAnims = {
-	["idle"] = "17464923657",
-	["walk"] = "15962326593",
+	["idle"] = "16524243757",
+	["walk"] = "14405440932",
 }
 
 local replacementAnimations = { 
