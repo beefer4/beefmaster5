@@ -1,3 +1,5 @@
+print(script.Parent.Parent.Parent)
+
 local plr = game.Players.LocalPlayer
 local chr = plr.Character or plr.CharacterAdded:Wait()
 local plrui = plr.PlayerGui
@@ -200,6 +202,7 @@ function alphaButton(parent)
 	alphaImage.Image = "rbxassetid://"..17862391938
 	alphaImage.Position = UDim2.new(-0.001, 0, -0.337, 0)
 	alphaImage.Size = UDim2.new(0.452, 0, 1.668, 0)
+	alphaImage.BackgroundTransparency = 1
 	alphaImage.ZIndex = 4
 
 	local alphaText = Instance.new("ImageLabel")
