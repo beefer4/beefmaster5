@@ -5,6 +5,7 @@ local plrui = plr.PlayerGui
 local ui = Instance.new("ScreenGui")
 ui.Name = "InfernoExp"
 ui.Parent = plrui
+ui.ResetOnSpawn = false
 
 function brolyButton(parent)
 	local broly = Instance.new("CanvasGroup")
