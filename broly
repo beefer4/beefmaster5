@@ -114,9 +114,9 @@ local function findGuiAndSetText()
 				textLabel.Text = ultName
 			end
 
-			local health = magicHealth:FindFirstChild("Health")
-			local barbar = health:WaitForChild("Bar")
-			local bar = barbar:WaitForChild("Bar")
+			--local health = magicHealth:WaitForChild("Health")
+			--local barbar = health:WaitForChild("Bar")
+			--local bar = barbar:WaitForChild("Bar")
 
 		end
 	end 
